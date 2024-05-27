@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Graph {
     Map<String, Node> nodes = new HashMap<>();
+    Node endNode;
 
     void readFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
@@ -51,6 +52,16 @@ public class Graph {
             route.add(previous);
             previous = previous.previous;
         }
+        endNode = nodes.get(end);
         return route.reversed();
+    }
+
+    int getEndNodeDistance() {
+        return endNode.distanceFromRoot;
+    }
+
+    void resetGraph() {
+        endNode = null;
+        nodes.forEach((e, f) -> { f.isVisited = false; f.previous = null; });
     }
 }

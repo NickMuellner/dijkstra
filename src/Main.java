@@ -5,6 +5,7 @@ public class Main {
         Graph graph = new Graph();
         graph.readFile("WienerVerkehrsNetz.txt");
         //graph.nodes.forEach((e, f) -> System.out.println(f));
-        System.out.println(graph.dijkstra("Stephansplatz", "Ottakring").stream().map(e -> e.name).collect(Collectors.joining(" - ")));
+        System.out.println(graph.dijkstra("Stephansplatz", "Rodaun").stream().map(e -> e.name).collect(Collectors.joining(" - ")));
+        System.out.println(graph.getEndNodeDistance());
     }
 }
