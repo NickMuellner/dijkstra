@@ -34,6 +34,9 @@ public class Graph {
         if(!nodes.containsKey(start)) {
             throw new IllegalArgumentException("Start node not found: " + start);
         }
+        if(!nodes.containsKey(end)){
+            throw new IllegalArgumentException("End node not found: " + end);
+        }
         Node startNode = nodes.get(start);
         startNode.isVisited = true;
         startNode.edgeList.forEach(e -> e.toNode.distanceFromRoot = e.weight);
