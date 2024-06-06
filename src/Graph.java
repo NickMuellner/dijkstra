@@ -7,7 +7,7 @@ public class Graph {
     Map<String, Node> nodes = new HashMap<>();
     Node endNode;
 
-    void readFile(String filename) {
+    public void readFile(String filename) {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line = br.readLine();
             while (line != null) {
@@ -30,7 +30,7 @@ public class Graph {
         }
     }
 
-    List<Node> dijkstra(String start, String end) {
+    public List<Node> dijkstra(String start, String end) {
         if(!nodes.containsKey(start)) {
             throw new IllegalArgumentException("Start node not found: " + start);
         }
@@ -56,7 +56,7 @@ public class Graph {
         return route.reversed();
     }
 
-    int getEndNodeDistance() {
+    public int getEndNodeDistance() {
         return endNode.distanceFromRoot;
     }
 
