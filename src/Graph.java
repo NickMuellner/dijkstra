@@ -43,12 +43,14 @@ public class Graph {
         startNode.edgeList.forEach(e -> e.toNode.previous = startNode);
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
         priorityQueue.addAll(startNode.getNeighbors(true));
-        while(!priorityQueue.isEmpty()) {
-            Node currentNode = priorityQueue.poll();
+        while(!priorityQueue.isEmpty()) { // Knoten (n)
+            Node currentNode = priorityQueue.poll(); // Poll (log n)
             //System.out.println(currentNode);
-            currentNode.visit();
-            currentNode.getNeighbors(true).stream().filter(e -> !priorityQueue.contains(e)).forEach(priorityQueue::add);
-        }
+            currentNode.visit(); // Kanten (2m)
+            currentNode.getNeighbors(true).stream()
+                    .filter(e -> !priorityQueue.contains(e)).forEach(priorityQueue::add);
+                    // Kanten (2m) // Add (log n) // Contains (n)
+        } // (n log n + 2m + 2m) + n m + n log n
         Node previous = nodes.get(end);
         List<Node> route = new ArrayList<>();
         while (previous != null) {
