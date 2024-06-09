@@ -10,17 +10,15 @@ public class Main {
             List<Node> nodes = graph.dijkstra(args[1], args[2]);
             List<Edge> edges = graph.getEdgesFromNodes(nodes);
             String currentLine = edges.getFirst().line;
+            System.out.print(edges.getFirst().line + ": ");
             for (int i = 0; i < nodes.size()-1; i++) {
                 if(!currentLine.equals(edges.get(i).line)) {
-                    System.out.println("Change from " + currentLine + " to " + edges.get(i).line);
                     currentLine = edges.get(i).line;
+                    System.out.print(currentLine + ": ");
                 }
-                System.out.println(nodes.get(i));
-                System.out.println(edges.get(i).line + ": " + edges.get(i).weight);
+                System.out.print(nodes.get(i) + " -(" + edges.get(i).weight + ")- ");
             }
-            System.out.println(nodes.getLast());
-            System.out.println(System.lineSeparator() + "Route:");
-            System.out.println(nodes.stream().map(e -> e.name).collect(Collectors.joining(" - ")));
+            System.out.print(nodes.getLast());
             System.out.println("Journey length in minutes: " + graph.getEndNodeDistance());
         } else {
             System.err.println("Invalid usage!");
