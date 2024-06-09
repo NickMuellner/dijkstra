@@ -45,7 +45,7 @@ public class Graph {
         priorityQueue.addAll(startNode.getNeighbors(true));
         while(!priorityQueue.isEmpty()) {
             Node currentNode = priorityQueue.poll();
-            System.out.println(currentNode);
+            //System.out.println(currentNode);
             currentNode.visit();
             currentNode.getNeighbors(true).stream().filter(e -> !priorityQueue.contains(e)).forEach(priorityQueue::add);
         }
@@ -66,5 +66,21 @@ public class Graph {
     void resetGraph() {
         endNode = null;
         nodes.forEach((e, f) -> { f.isVisited = false; f.previous = null; });
+    }
+
+    List<Edge> getEdgesFromNodes(List<Node> nodes) {
+        List<Edge> edges = new ArrayList<>();
+        for (int i = 0; i < nodes.size()-1; i++) {
+            Edge lowestWeightEdge = null;
+            for (Edge edge : nodes.get(i).edgeList) {
+                if(edge.toNode == nodes.get(i+1) && lowestWeightEdge == null) {
+                    lowestWeightEdge = edge;
+                } else if(edge.toNode == nodes.get(i+1) && lowestWeightEdge != null && edge.weight < lowestWeightEdge.weight) {
+                    lowestWeightEdge = edge;
+                }
+            }
+            edges.add(lowestWeightEdge);
+        }
+        return edges;
     }
 }
